@@ -1,11 +1,4 @@
 # python venv
 .venv
 
-# tests dir
-tests
-
-# any leftovers
-*.json
-*.py
-
-.http
+__pycache__
