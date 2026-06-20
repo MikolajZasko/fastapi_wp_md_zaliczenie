@@ -1,7 +1,11 @@
-### Test Valid POST Request
-POST http://127.0.0.1:8000/sum
-Content-Type: application/json
+# ### Test Valid POST Request
+# POST http://127.0.0.1:8000/sum
+# Content-Type: application/json
 
-{
-    "list": [1,2,3,1100]
-}
+# {
+#     "list": [1,2,3,1100]
+# }
+
+# get query test
+GET http://127.0.0.1:8000/query?a=b&b=c
+Content-Type: application/json

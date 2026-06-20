@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from importlib.metadata import version
 import json
 import os
@@ -37,30 +37,19 @@ def read_root():
 def read_root(name: str):
     return f"Hello {name}!"
 
-@app.get("/{param}")
-def read_root (param: str):
+@app.get("/query")
+def read_root(request: Request):
     
-    # read the json file
-    json_storage = load_storage()
+    # convert to python dics
+    params = dict(request.query_params)
 
-    # check if param in storage
-    if json_storage.__contains__(param):
-        json_storage[param] += 1
+    # create a result string
+    result = ""
 
-        # save the storage
-        save_storage(json_storage)
+    for k ,v in params.items():
+        result += f"'{k}' parameter with '{v}' value was queried. "
 
-        # return the result to the user
-        return f"The param {param} was called {json_storage[param]} times"
-    else:
-        # this is the first call
-        json_storage[param] = 1
-
-        # save storage
-        save_storage(json_storage)
-
-        # return the result to the user
-        return f"The param {param} was called for the first time!"
+    return result
 
 # define the class for input in POST /sum
 class sum_list(BaseModel):
